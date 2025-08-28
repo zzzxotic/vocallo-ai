@@ -1,0 +1,216 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 4.9%;
+
+    --primary: 231 98% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 230 20% 96%;
+    --secondary-foreground: 222 84% 4.9%;
+
+    --muted: 230 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 193 76% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 20% 90%;
+    --input: 230 20% 90%;
+    --ring: 231 98% 65%;
+
+    --radius: 0.75rem;
+
+    /* Vocallo brand colors */
+    --indigo: 231 98% 65%;
+    --cyan: 193 76% 56%;
+    --glass: 0 0% 100% / 0.1;
+    --glass-border: 0 0% 100% / 0.2;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 231 98% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 193 76% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 231 98% 65%;
+
+    /* Dark theme Vocallo colors */
+    --indigo: 231 98% 65%;
+    --cyan: 193 76% 56%;
+    --glass: 0 0% 0% / 0.1;
+    --glass-border: 0 0% 100% / 0.1;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+
+  /* Glassmorphism utilities */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Smooth animations - reduced intensity for enterprise feel */
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition-duration: 120ms;
+  }
+
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Page transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 350ms ease-out, transform 350ms ease-out;
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 150ms ease-in, transform 150ms ease-in;
+  }
+
+  /* Background gradients */
+  .bg-gradient-vocallo {
+    background: linear-gradient(135deg, 
+      hsla(231, 98%, 65%, 0.05) 0%, 
+      hsla(193, 76%, 56%, 0.05) 100%);
+  }
+
+  /* Focus states */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2;
+  }
+
+  /* Wavy background shapes */
+  .wavy-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top left, hsla(231, 98%, 65%, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, hsla(193, 76%, 56%, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  /* Button hover glow effect - reduced intensity */
+  .btn-glow {
+    @apply shadow-lg transition-all duration-200;
+  }
+
+  .btn-glow:hover {
+    @apply shadow-xl;
+    box-shadow: 0 0 20px hsla(231, 98%, 65%, 0.25);
+  }
+
+  /* Clean, professional styling */
+}
+
+@layer utilities {
+  /* Clean transitions and effects */
+}
